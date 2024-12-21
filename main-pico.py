@@ -4,9 +4,6 @@ import time
 # Initialize I2C on GPIO pins (SDA=Pin 0, SCL=Pin 1)
 i2c = I2C(0, scl=Pin(1), sda=Pin(0), freq=400000)
 
-# Define the I2C address of the Pi
-buffer = bytearray(32)
-
 #variable for leak sensing
 isLeak = False
 
