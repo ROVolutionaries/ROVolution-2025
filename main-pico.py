@@ -4,9 +4,6 @@ import time
 # Initialize I2C on GPIO pins (SDA=Pin 0, SCL=Pin 1)
 i2c = I2C(0, scl=Pin(1), sda=Pin(0), freq=400000)
 
-# Define the I2C address of the Pi
-buffer = bytearray(32)
-
 #variable for leak sensing
 isLeak = False
 
@@ -14,7 +11,6 @@ isLeak = False
 F = 1900
 S = 1500
 R = 1100
-thrust = 1 #percentage of thrust power used from 0.0 to 1.0
 
 # Define individual  pins on pico (change according to electrical diagram)
 vMotor1 = 1
@@ -64,44 +60,92 @@ def stop(motor):
     motor.duty_ns(1500)
 
 #vectored movement functions
-def move_forward():
+def move_forward(thrust):
     forward(h3, thrust)
     forward(h4, thrust)
     reverse(h1, thrust)
     reverse(h2, thrust)
 
-def back():
+def back(thrust):
     reverse(h3, thrust)
     reverse(h4, thrust)
     forward(h1, thrust)
     forward(h2, thrust)
 
-def right():
+def right(thrust):
     forward(h1, thrust)
     forward(h3, thrust)
     reverse(h2, thrust)
     reverse(h4,thrust)
 
-def left():
+def left(thrust):
     forward(h2, thrust)
     forward(h4, thrust)
     reverse(h1, thrust)
     reverse(h3,thrust)
 
-def forward_left():
+def forward_left(thrust):
     forward(h4, thrust)
     reverse(h1, thrust)
 
-def forward_right():
+def forward_right(thrust):
     forward(h3, thrust)
     reverse(h2, thrust)
 
-def back_left():
+def back_left(thrust):
     forward(h1, thrust)
     reverse(h4, thrust)
 
-def back_right():
+def back_right(thrust):
     reverse(h3, thrust)
+    forward(h2, thrust)
+
+def up(thrust):
+    reverse(v1, thrust)
+    reverse(v2, thrust)
+    reverse(v3, thrust)
+    reverse(v4, thrust)
+
+def down(thrust):
+    forward(v1, thrust)
+    forward(v2, thrust)
+    forward(v3, thrust)
+    forward(v4, thrust)
+
+def roll_right(thrust):
+    forward(v1, thrust)
+    reverse(v2, thrust)
+    forward(v3, thrust)
+    reverse(v4, thrust)
+
+def roll_left(thrust):
+    reverse(v1, thrust)
+    forward(v2, thrust)
+    reverse(v3, thrust)
+    forward(v4, thrust)
+
+def pitch_forward(thrust)
+    forward(v1, thrust)
+    forward(v2, thrust)
+    reverse(v3, thrust)
+    reverse(v4, thrust)
+
+def pitch_back(thrust)
+    reverse(v1, thrust)
+    reverse(v2, thrust)
+    forward(v3, thrust)
+    forward(v4, thrust)
+
+def yaw_right(thrust):
+    reverse(h3, thrust)
+    forward(h4, thrust)
+    forward(h1, thrust)
+    reverse(h2, thrust)
+
+def yaw_left(thrust):
+    forward(h3, thrust)
+    reverse(h4, thrust)
+    reverse(h1, thrust)
     forward(h2, thrust)
 
 def read_ph():
@@ -112,7 +156,7 @@ def leak():
     if leak.value() == 0:
         global isLeak = 0
     elif leak.value() == 1:
-        isLeak = 1
+        global isLeak = 1
 
 def read_commands():
     i2c.readinto(data)
@@ -128,6 +172,48 @@ def send_sensor_data():
     data[0] = isLeak
     data[1] = int(read_ph * 100)
     i2c.write(data)
+
+while True:
+    commands = read_commands()
+    signal = commands[0]
+    thrust = commands[1]
+    if signal == 1:
+        move_forward(thrust)
+    elif signal == 2:
+        back(thrust)
+    elif signal == 3:
+        right(thrust)
+    elif signal == 4:
+        left(thrust)
+    elif signal == 5:
+        forward_left(thrust)
+    elif signal == 6:
+        forward_right(thrust)
+    elif signal == 7:
+        back_left(thrust)
+    elif signal == 8:
+        back_right(thrust)
+    elif signal == 9:
+        up(thrust)
+    elif signal == 10:
+        down(thrust)
+    elif signal == 11:
+        roll_right(thrust)
+    elif signal == 12:
+        roll_left(thrust)
+    elif signal == 13:
+        pitch_forward(thrust)
+    elif signal == 14:
+        pitch_back(thrust)
+    elif signal == 15:
+        yaw_right(thrust)
+    elif signal == 16:
+        yaw_left(thrust)
+        
+    elif signal == 17:
+        send_sensor_data()
+
+    
 
 
 
