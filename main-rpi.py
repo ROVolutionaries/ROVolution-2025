@@ -11,7 +11,6 @@ server_socket.bind(('0.0.0.0', 5000))
 
 # Enable the server to accept connections
 server_socket.listen()
-print(f"Server listening on {host}:{port}")
 
 # Accept connection from client
 client_socket, addr = server_socket.accept()

@@ -124,13 +124,13 @@ def roll_left(thrust):
     reverse(v3, thrust)
     forward(v4, thrust)
 
-def pitch_forward(thrust)
+def pitch_forward(thrust):
     forward(v1, thrust)
     forward(v2, thrust)
     reverse(v3, thrust)
     reverse(v4, thrust)
 
-def pitch_back(thrust)
+def pitch_back(thrust):
     reverse(v1, thrust)
     reverse(v2, thrust)
     forward(v3, thrust)
@@ -153,10 +153,11 @@ def read_ph():
     #update later to include some operation to convert to reading between 0 and 14
 
 def leak():
+    global isLeak
     if leak.value() == 0:
-        global isLeak = 0
+        isLeak = 0
     elif leak.value() == 1:
-        global isLeak = 1
+        isLeak = 1
 
 def read_commands():
     i2c.readinto(data)
