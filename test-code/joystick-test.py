@@ -6,6 +6,8 @@ pygame.init()
 # Initialize the joystick
 pygame.joystick.init()
 
+clock = pygame.time.Clock()
+
 # Check if a joystick is connected
 if pygame.joystick.get_count() == 0:
     print("No joystick connected!")
@@ -41,10 +43,9 @@ while running:
             right_stick_x = 0 if abs(right_stick_x) < DEAD_ZONE else right_stick_x
             right_stick_y = 0 if abs(right_stick_y) < DEAD_ZONE else right_stick_y
 
-            
-            print(f"Left Stick: ({left_stick_x}, {left_stick_y})")
-            print(f"Right Stick: ({right_stick_x}, {right_stick_y})")
-        
+            if abs(left_stick_x)  != 0 or (left_stick_y) != 0 or abs(right_stick_x) != 0 or abs(right_stick_y) != 0:
+                print(f"Left Stick: ({left_stick_x}, {left_stick_y})" + f", Right Stick: ({right_stick_x}, {right_stick_y})")
+                     
         # Button press events
         if event.type == pygame.JOYBUTTONDOWN:
             button = event.button
@@ -64,7 +65,7 @@ while running:
                 print("L2 Button Pressed")
             elif button == 7:  # R2 (Digital button, not trigger)
                 print("R2 Button Pressed")
-            elif button == 8:  # Middle button
+            elif button == 15:  # Middle button
                 print("Middle Button Pressed")
         
         # D-pad inputs
@@ -72,14 +73,17 @@ while running:
             dpad_x, dpad_y = joystick.get_hat(0)
             print(f"D-pad: ({dpad_x}, {dpad_y})")
             # D-pad up: (0, 1), down: (0, -1), left: (-1, 0), right: (1, 0)
-    
-    # Optional: L2/R2 triggers (analog) are axes 4 and 5 on many controllers
-    l2_trigger = joystick.get_axis(4)
-    r2_trigger = joystick.get_axis(5)
-    print(f"L2 Trigger: {l2_trigger}, R2 Trigger: {r2_trigger}")
 
+        # Optional: L2/R2 triggers (analog) are axes 4 and 5 on many controllers
+        
+        l2_trigger = joystick.get_axis(4)
+        r2_trigger = joystick.get_axis(5)
+        if l2_trigger != 0 or r2_trigger != 0:
+            print(f"L2 Trigger: {l2_trigger}, R2 Trigger: {r2_trigger}")
+
+    
     # Limit loop execution speed
-    pygame.time.wait(100)
+    clock.tick(60)
 
 # Quit pygame
 pygame.quit()
