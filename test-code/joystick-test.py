@@ -1,4 +1,5 @@
 import pygame
+import math 
 
 # Initialize pygame
 pygame.init()
@@ -43,8 +44,40 @@ while running:
             right_stick_x = 0 if abs(right_stick_x) < DEAD_ZONE else right_stick_x
             right_stick_y = 0 if abs(right_stick_y) < DEAD_ZONE else right_stick_y
 
-            if abs(left_stick_x)  != 0 or (left_stick_y) != 0 or abs(right_stick_x) != 0 or abs(right_stick_y) != 0:
-                print(f"Left Stick: ({left_stick_x}, {left_stick_y})" + f", Right Stick: ({right_stick_x}, {right_stick_y})")
+            magnitude = math.sqrt(left_stick_x**2 + left_stick_y**2)
+
+            # Ensure the magnitude is within [0, 1]
+            if magnitude > 1:
+                magnitude = 1
+            
+            # Calculate the angle in radians
+            angle = math.atan2(left_stick_y, left_stick_x)
+
+            angle_degrees = math.degrees(angle)
+            if angle_degrees < 0:
+                angle_degrees += 360  #
+
+            if 337.5 <= angle_degrees or angle_degrees < 22.5:
+                direction = "Right"
+            elif 22.5 <= angle_degrees < 67.5:
+                direction = "Forward-Right"
+            elif 67.5 <= angle_degrees < 112.5:
+                direction = "Forward"
+            elif 112.5 <= angle_degrees < 157.5:
+                direction = "Forward-Left"
+            elif 157.5 <= angle_degrees < 202.5:
+                direction = "Left"
+            elif 202.5 <= angle_degrees < 247.5:
+                direction = "Back-Left"
+            elif 247.5 <= angle_degrees < 292.5:
+                direction = "Back"
+            elif 292.5 <= angle_degrees < 337.5:
+                direction = "Back-Right"
+
+            print(f"Direction: {direction}, Magnitude: {magnitude}")
+
+            #if abs(left_stick_x)  != 0 or (left_stick_y) != 0 or abs(right_stick_x) != 0 or abs(right_stick_y) != 0:
+            #    print(f"Left Stick: ({left_stick_x}, {left_stick_y})" + f", Right Stick: ({right_stick_x}, {right_stick_y})")
                      
         # Button press events
         if event.type == pygame.JOYBUTTONDOWN:
@@ -61,9 +94,9 @@ while running:
                 print("L1 Pressed")
             elif button == 5:  # R1
                 print("R1 Pressed")
-            elif button == 6:  # L2 (Digital button, not trigger)
+            elif button == 9:  # L2 (Digital button, not trigger)
                 print("L2 Button Pressed")
-            elif button == 7:  # R2 (Digital button, not trigger)
+            elif button == 10:  # R2 (Digital button, not trigger)
                 print("R2 Button Pressed")
             elif button == 15:  # Middle button
                 print("Middle Button Pressed")
