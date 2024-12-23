@@ -33,72 +33,71 @@ while running:
         # Joystick motion events
         if event.type == pygame.JOYAXISMOTION:
             # Analog stick inputs
-            left_stick_x = joystick.get_axis(0)  # Left stick horizontal
-            left_stick_y = joystick.get_axis(1)  # Left stick vertical
-            right_stick_x = joystick.get_axis(2)  # Right stick horizontal
-            right_stick_y = joystick.get_axis(3)  # Right stick vertical
+            left_stick_x = joystick.get_axis(0)  #Left stick horizontal
+            left_stick_y = joystick.get_axis(1)  #Left stick vertical
+            right_stick_x = joystick.get_axis(2)  #Right stick horizontal
+            right_stick_y = joystick.get_axis(3)  #Right stick vertical
+            
+            sticks = {
+                "Left": (left_stick_x, left_stick_y),
+                "Right": (right_stick_x, right_stick_y),
+            }
 
-            # Apply dead zone
-            left_stick_x = 0 if abs(left_stick_x) < DEAD_ZONE else left_stick_x
-            left_stick_y = 0 if abs(left_stick_y) < DEAD_ZONE else left_stick_y
-            right_stick_x = 0 if abs(right_stick_x) < DEAD_ZONE else right_stick_x
-            right_stick_y = 0 if abs(right_stick_y) < DEAD_ZONE else right_stick_y
+            directions = [
+                (337.5, 22.5, "Right"),
+                (22.5, 67.5, "Back-Right"),
+                (67.5, 112.5, "Back"),
+                (112.5, 157.5, "Back-Left"),
+                (157.5, 202.5, "Left"),
+                (202.5, 247.5, "Forward-Left"),
+                (247.5, 292.5, "Forward"),
+                (292.5, 337.5, "Forward-Right"),
+            ]
 
-            magnitude = math.sqrt(left_stick_x**2 + left_stick_y**2)
+            for stick_name, (x, y) in sticks.items():
+                # Apply dead zone
+                x = 0 if abs(x) < DEAD_ZONE else x
+                y = 0 if abs(y) < DEAD_ZONE else y
 
-            # Ensure the magnitude is within [0, 1]
+            #Calculate magnitude and normalise
+            magnitude = math.sqrt(x**2 + y**2)
             if magnitude > 1:
                 magnitude = 1
-            
-            # Calculate the angle in radians
-            angle = math.atan2(left_stick_y, left_stick_x)
 
-            angle_degrees = math.degrees(angle)
-            if angle_degrees < 0:
-                angle_degrees += 360  #
+            #Calculate the angle in degrees
+            angle = math.degrees(math.atan2(y, x))
+            if angle < 0:
+                angle += 360
 
-            if 337.5 <= angle_degrees or angle_degrees < 22.5:
-                direction = "Right"
-            elif 22.5 <= angle_degrees < 67.5:
-                direction = "Back-Right"
-            elif 67.5 <= angle_degrees < 112.5:
-                direction = "Back"
-            elif 112.5 <= angle_degrees < 157.5:
-                direction = "Back-Left"
-            elif 157.5 <= angle_degrees < 202.5:
-                direction = "Left"
-            elif 202.5 <= angle_degrees < 247.5:
-                direction = "Forward-Left"
-            elif 247.5 <= angle_degrees < 292.5:
-                direction = "Forward"
-            elif 292.5 <= angle_degrees < 337.5:
-                direction = "Forward-Right"
+            #Determine direction
+            direction = "Unknown"
+            for start, end, dir_name in directions:
+                if start <= angle or angle < end:
+                    direction = dir_name
+                    break
 
-            print(f"Direction: {direction}, Magnitude: {magnitude}, Angle {angle_degrees}")
-
-            #if abs(left_stick_x)  != 0 or (left_stick_y) != 0 or abs(right_stick_x) != 0 or abs(right_stick_y) != 0:
-            #    print(f"Left Stick: ({left_stick_x}, {left_stick_y})" + f", Right Stick: ({right_stick_x}, {right_stick_y})")
+            print(f"{stick_name} Stick - Direction: {direction}, Magnitude: {magnitude:.2f}, Angle: {angle:.2f}°")
                      
         # Button press events
         if event.type == pygame.JOYBUTTONDOWN:
             button = event.button
-            if button == 0:  # Cross (Shape buttons mapping may vary)
-                print("Cross Pressed")
-            elif button == 1:  # Circle
+            if button == 0:  
+                print("X Pressed")
+            elif button == 1:  
                 print("Circle Pressed")
-            elif button == 2:  # Square
+            elif button == 2:  
                 print("Square Pressed")
-            elif button == 3:  # Triangle
+            elif button == 3: 
                 print("Triangle Pressed")
-            elif button == 4:  # L1
+            elif button == 4:  
                 print("L1 Pressed")
-            elif button == 5:  # R1
+            elif button == 5:  
                 print("R1 Pressed")
-            elif button == 9:  # L2 (Digital button, not trigger)
+            elif button == 9:  
                 print("L2 Button Pressed")
-            elif button == 10:  # R2 (Digital button, not trigger)
+            elif button == 10:  
                 print("R2 Button Pressed")
-            elif button == 15:  # Middle button
+            elif button == 15:  
                 print("Middle Button Pressed")
         
         # D-pad inputs
