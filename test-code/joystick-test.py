@@ -60,21 +60,21 @@ while running:
             if 337.5 <= angle_degrees or angle_degrees < 22.5:
                 direction = "Right"
             elif 22.5 <= angle_degrees < 67.5:
-                direction = "Forward-Right"
+                direction = "Back-Right"
             elif 67.5 <= angle_degrees < 112.5:
-                direction = "Forward"
+                direction = "Back"
             elif 112.5 <= angle_degrees < 157.5:
-                direction = "Forward-Left"
+                direction = "Back-Left"
             elif 157.5 <= angle_degrees < 202.5:
                 direction = "Left"
             elif 202.5 <= angle_degrees < 247.5:
-                direction = "Back-Left"
+                direction = "Forward-Left"
             elif 247.5 <= angle_degrees < 292.5:
-                direction = "Back"
+                direction = "Forward"
             elif 292.5 <= angle_degrees < 337.5:
-                direction = "Back-Right"
+                direction = "Forward-Right"
 
-            print(f"Direction: {direction}, Magnitude: {magnitude}")
+            print(f"Direction: {direction}, Magnitude: {magnitude}, Angle {angle_degrees}")
 
             #if abs(left_stick_x)  != 0 or (left_stick_y) != 0 or abs(right_stick_x) != 0 or abs(right_stick_y) != 0:
             #    print(f"Left Stick: ({left_stick_x}, {left_stick_y})" + f", Right Stick: ({right_stick_x}, {right_stick_y})")
