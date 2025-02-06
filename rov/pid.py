@@ -26,6 +26,6 @@ def get_roll_PID(roll_input):
 def get_pitch_PID(pitch_input):
     pitch_control.update(0, pitch_input) #integrate with gyro code later
 
-def get_yaw_PID(roll_input):
+def get_yaw_PID(yaw_input):
     yaw_control.update(0, yaw_input) #integrate with gyro code later
 

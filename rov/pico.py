@@ -4,6 +4,8 @@ import time
 # Initialize I2C on GPIO pins (SDA=Pin 0, SCL=Pin 1)
 i2c = I2C(0, scl=Pin(1), sda=Pin(0), freq=400000)
 
+SLAVE_ADDRESS = 0x10
+
 #variable for leak sensing
 isLeak = False
 
@@ -21,7 +23,7 @@ hMotor1 = 5
 hMotor2 = 6
 hMotor3 = 7
 hMotor4 = 8
-pH = machine.ADC(34)
+pH = machine.ADC(28)
 servo1 = 9
 servo2 = 10
 FOC = 11
@@ -160,8 +162,9 @@ def leak():
         isLeak = 1
 
 def read_commands():
-    i2c.readinto(data)
-    data = int.from_bytes(data)
+    data = bytearray(2)  # ✅ Initialize before use
+    i2c.readinto(data)  # ✅ Read data into bytearray
+
     signal = data[0]  # First byte is the signal
     thrust_gain = data[1]  # Second byte is the scaled thrust gain (0-100)
     thrust = thrust_gain / 100.0  # Convert back to 0.0-1.0 range
@@ -169,10 +172,12 @@ def read_commands():
     return (signal, thrust)
 
 def send_sensor_data():
+    global isLeak
+
     data = bytearray(2)
     data[0] = isLeak
-    data[1] = int(read_ph * 100)
-    i2c.write(data)
+    data[1] = int(read_ph() * 100)
+    i2c.writeto(SLAVE_ADDRESS, data)
 
 while True:
     commands = read_commands()
@@ -213,6 +218,18 @@ while True:
         
     elif signal == 17:
         send_sensor_data()
+
+    elif signal == 18():
+        led = Pin("LED", Pin.OUT)
+        led.on()
+
+while True:
+    time.sleep(0.5)
+    devices = i2c.scan()
+    if SLAVE_ADDRESS in devices:
+        print("Slave device found!")
+    else:
+        print("Slave device not found!")
 
     
 
