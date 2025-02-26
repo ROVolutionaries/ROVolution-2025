@@ -6,6 +6,9 @@
 #include <array>
 
 #define I2C_ADDR 0x10
+const uint8_t I2C_SLAVE_SDA_PIN = PICO_DEFAULT_I2C_SDA_PIN; // 4
+static const uint I2C_SLAVE_SCL_PIN = PICO_DEFAULT_I2C_SCL_PIN; // 5
+static const uint I2C_BAUDRATE = 100000; // 100 kHz
 
 //PWM microsecond values for forward, stop, reverse
 const uint16_t F = 1900;
@@ -32,6 +35,21 @@ bool isLeak = false;
 
 std::array<uint, 8> slice_num;
 std::array<uint, 8> channel;
+
+static void setup_slave() {
+    gpio_init(I2C_SLAVE_SDA_PIN);
+    gpio_set_function(I2C_SLAVE_SDA_PIN, GPIO_FUNC_I2C);
+    gpio_pull_up(I2C_SLAVE_SDA_PIN);
+
+    gpio_init(I2C_SLAVE_SCL_PIN);
+    gpio_set_function(I2C_SLAVE_SCL_PIN, GPIO_FUNC_I2C);
+    gpio_pull_up(I2C_SLAVE_SCL_PIN);
+
+    i2c_init(i2c0, I2C_BAUDRATE);
+    // configure I2C0 for slave mode
+    i2c_slave_init(i2c0, I2C_SLAVE_ADDRESS, &i2c_slave_handler);
+}
+
 
 // Initialise all thrusters to pulse width 1500 microseconds
 void initialize_motors() {
