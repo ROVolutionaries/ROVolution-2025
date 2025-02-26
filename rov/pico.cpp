@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include "hardware/adc.h"
 #include "hardware/pwm.h"
+//#include "i2c_fifo.h"
+#include "pico/i2c_slave.h"
 #include <array>
 
 #define I2C_ADDR 0x10
@@ -35,21 +37,6 @@ bool isLeak = false;
 
 std::array<uint, 8> slice_num;
 std::array<uint, 8> channel;
-
-static void setup_slave() {
-    gpio_init(I2C_SLAVE_SDA_PIN);
-    gpio_set_function(I2C_SLAVE_SDA_PIN, GPIO_FUNC_I2C);
-    gpio_pull_up(I2C_SLAVE_SDA_PIN);
-
-    gpio_init(I2C_SLAVE_SCL_PIN);
-    gpio_set_function(I2C_SLAVE_SCL_PIN, GPIO_FUNC_I2C);
-    gpio_pull_up(I2C_SLAVE_SCL_PIN);
-
-    i2c_init(i2c0, I2C_BAUDRATE);
-    // configure I2C0 for slave mode
-    i2c_slave_init(i2c0, I2C_SLAVE_ADDRESS, &i2c_slave_handler);
-}
-
 
 // Initialise all thrusters to pulse width 1500 microseconds
 void initialize_motors() {
@@ -195,33 +182,79 @@ uint16_t read_ph() {
     return raw_pH;
 }
 
-void check_leak() {
+bool check_leak() {
     isLeak = !gpio_get(leak_pin);  // Invert because 0 means leak detected
+    return isLeak;
 }
 
-void send_sensor_data() {
-    uint8_t data[2];
-    data[0] = isLeak ? 1 : 0;
-    data[1] = static_cast<uint8_t>(read_ph() * 100 / 65535);  // Scale 16-bit ADC value to 0-100 range
 
-    i2c_write_raw_blocking(i2c0, data, 2);
-}
-
-std::pair<uint8_t, float> read_commands() {
+static void i2c_slave_handler(i2c_inst_t *i2c, i2c_slave_event_t event) {
+    static uint8_t byte_count = 0;
+    static uint8_t signal = 0;
+    static uint8_t thrust_gain = 0;
     uint8_t data[2];
-    int bytes_read = i2c_read_raw_blocking(i2c0, data, 2);
-    
-    if (bytes_read != 2) {
-        // Handle error: didn't receive expected amount of data
-        return std::make_pair(0, 0.0f);
+
+    switch (event){
+        case I2C_SLAVE_RECEIVE:
+        if (byte_count == 0) {
+                    signal = i2c_read_byte_raw(i2c);
+                    byte_count++;
+        } 
+        else if (byte_count == 1) {
+            thrust_gain = i2c_read_byte_raw(i2c);
+            byte_count = 0;
+        }
+
+        float thrust = thrust_gain / 100.0f;  // Convert back to 0.0-1.0 range
+
+        switch(signal) {
+            case 0: gpio_put(LED_PIN, 0); break;
+            case 1: move_forward(thrust); break;
+            case 2: back(thrust); break;
+            case 3: right(thrust); break;
+            case 4: left(thrust); break;
+            case 5: forward_left(thrust); break;
+            case 6: forward_right(thrust); break;
+            case 7: back_left(thrust); break;
+            case 8: back_right(thrust); break;
+            case 9: up(thrust); break;
+            case 10: down(thrust); break;
+            case 11: roll_right(thrust); break;
+            case 12: roll_left(thrust); break;
+            case 13: pitch_forward(thrust); break;
+            case 14: pitch_back(thrust); break;
+            case 15: yaw_right(thrust); break;
+            case 16: yaw_left(thrust); break;
+            case 17: send_sensor_data(); break;
+            case 18: gpio_put(LED_PIN, 1); break; // Turn on LED
+            default: break; // Do nothing for unrecognized signals
+        }
+        break;
+
+        case I2C_SLAVE_REQUEST:
+        data[0] = check_leak();
+        data[1] = static_cast<uint8_t>(read_ph() * 100 / 65535); // Scale 16-bit ADC value to 0-100 range
+        i2c_write_byte(i2c, data[0]);
+        i2c_write_byte(i2c, data[1]);
+        break;
+
     }
 
-    uint8_t signal = data[0];  // First byte is the signal
-    uint8_t thrust_gain = data[1];  // Second byte is the scaled thrust gain (0-100)
-    float thrust = thrust_gain / 100.0f;  // Convert back to 0.0-1.0 range
 
-    return std::make_pair(signal, thrust);
+static void setup_slave() {
+    gpio_init(I2C_SLAVE_SDA_PIN);
+    gpio_set_function(I2C_SLAVE_SDA_PIN, GPIO_FUNC_I2C);
+    gpio_pull_up(I2C_SLAVE_SDA_PIN);
+
+    gpio_init(I2C_SLAVE_SCL_PIN);
+    gpio_set_function(I2C_SLAVE_SCL_PIN, GPIO_FUNC_I2C);
+    gpio_pull_up(I2C_SLAVE_SCL_PIN);
+
+    i2c_init(i2c0, I2C_BAUDRATE);
+    // configure I2C0 for slave mode
+    i2c_slave_init(i2c0, I2C_ADDR, &i2c_slave_handler);
 }
+
 
 int main() {
     stdio_init_all();
@@ -249,34 +282,7 @@ int main() {
 
     initialize_motors();
 
-    while (true) {
-        auto [signal, thrust] = read_commands();
-        
-        switch(signal) {
-            case 0: gpio_put(LED_PIN, 1); break;
-            case 1: move_forward(thrust); break;
-            case 2: back(thrust); break;
-            case 3: right(thrust); break;
-            case 4: left(thrust); break;
-            case 5: forward_left(thrust); break;
-            case 6: forward_right(thrust); break;
-            case 7: back_left(thrust); break;
-            case 8: back_right(thrust); break;
-            case 9: up(thrust); break;
-            case 10: down(thrust); break;
-            case 11: roll_right(thrust); break;
-            case 12: roll_left(thrust); break;
-            case 13: pitch_forward(thrust); break;
-            case 14: pitch_back(thrust); break;
-            case 15: yaw_right(thrust); break;
-            case 16: yaw_left(thrust); break;
-            case 17: send_sensor_data(); break;
-            case 18: gpio_put(LED_PIN, 1); break; // Turn on LED
-            default: break; // Do nothing for unrecognized signals
-        }
-
-        sleep_ms(10); // Small delay to prevent tight looping
-    }
+    setup_slave()
 
     return 0;
 }
