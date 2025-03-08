@@ -44,15 +44,16 @@ def update(frame):
         y = coords_array[:, 1]
         
         # Plot the line with thicker width for affected regions
-        line_width = 4 if is_affected else 2
-        line_color = 'red' if is_affected else 'blue'
-        line_alpha = 1.0 if is_affected else 0.5
+        line_width = 4 if is_affected else 1
+        line_color = 'red' if is_affected else '#3baeff'
+        line_alpha = 1.0 if is_affected else 1
         
         # Plot the line (note: not flipping coordinates as you indicated they're already flipped)
         ax.plot(x, y, '-', linewidth=line_width, color=line_color, alpha=line_alpha)
         
         # Add region label
         center = np.mean(coords_array, axis=0)
+        """
         text = ax.text(center[0], center[1], region, 
                  horizontalalignment='center',
                  verticalalignment='center',
@@ -60,6 +61,7 @@ def update(frame):
                  color='white', 
                  fontweight='bold')
         text.set_path_effects([path_effects.withStroke(linewidth=3, foreground='black')])
+        """
     
     # Add year in the bottom right
     year_text = ax.text(0.95, 0.95, str(year), 
