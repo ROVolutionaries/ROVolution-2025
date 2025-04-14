@@ -1,21 +1,33 @@
 #include "pico/stdlib.h"
-#include "hardware/i2c.h"
 #include <stdio.h>
 #include "hardware/adc.h"
 #include "hardware/pwm.h"
-//#include "i2c_fifo.h"
-#include "pico/i2c_slave.h"
+#include "hardware/uart.h"
 #include <array>
 
-#define I2C_ADDR 0x10
-const uint8_t I2C_SLAVE_SDA_PIN = PICO_DEFAULT_I2C_SDA_PIN; // 4
-static const uint I2C_SLAVE_SCL_PIN = PICO_DEFAULT_I2C_SCL_PIN; // 5
-static const uint I2C_BAUDRATE = 100000; // 100 kHz
+#define UART_ID uart1
+
+#define UART_TX_PIN 4
+#define UART_RX_PIN 5
+
+//UART handler data
+static uint8_t byte_count = 0;
+static uint8_t signal = 0;
+static uint8_t thrust_gain = 0;
+char data[2];
+
+
+static const uint BAUDRATE = 115200; // 100 kHz
 
 //PWM microsecond values for forward, stop, reverse
 const uint16_t F = 1900;
 const uint16_t S = 1500;
 const uint16_t R = 1100;
+
+// LED PIN
+const uint LED_PIN = PICO_DEFAULT_LED_PIN;
+
+float thrust;
 
 // Thrusters
 const uint8_t vMotor1 = 1;
@@ -186,29 +198,39 @@ bool check_leak() {
     isLeak = !gpio_get(leak_pin);  // Invert because 0 means leak detected
     return isLeak;
 }
+int int_from_uart(uart_inst_t *uart) {
+    int result = 0;
+    char c;
+    while (1) {
+        c = uart_getc(uart);
+        if (c >= '0' && c <= '9') {
+            result = result * 10 + (c - '0');
+        } else {
+            // Non-digit character received, assume end of number
+            break;
+        }
+    }
+    return result;
+}
 
+void on_uart_rx() {
+    while (uart_is_readable(UART_ID)){
+        if (byte_count == 0){
+            signal = int_from_uart(UART_ID);
+            printf("Received character: %d\n", signal);
 
-static void i2c_slave_handler(i2c_inst_t *i2c, i2c_slave_event_t event) {
-    static uint8_t byte_count = 0;
-    static uint8_t signal = 0;
-    static uint8_t thrust_gain = 0;
-    uint8_t data[2];
-
-    switch (event){
-        case I2C_SLAVE_RECEIVE:
-        if (byte_count == 0) {
-                    signal = i2c_read_byte_raw(i2c);
-                    byte_count++;
-        } 
-        else if (byte_count == 1) {
-            thrust_gain = i2c_read_byte_raw(i2c);
+            byte_count++;
+        }
+        else{
+            thrust_gain = int_from_uart(UART_ID);
             byte_count = 0;
         }
 
         float thrust = thrust_gain / 100.0f;  // Convert back to 0.0-1.0 range
 
+        gpio_put(LED_PIN, 0);
         switch(signal) {
-            case 0: gpio_put(LED_PIN, 0); break;
+            case 0: gpio_put(LED_PIN, 1); break;
             case 1: move_forward(thrust); break;
             case 2: back(thrust); break;
             case 3: right(thrust); break;
@@ -225,47 +247,33 @@ static void i2c_slave_handler(i2c_inst_t *i2c, i2c_slave_event_t event) {
             case 14: pitch_back(thrust); break;
             case 15: yaw_right(thrust); break;
             case 16: yaw_left(thrust); break;
-            case 17: send_sensor_data(); break;
-            case 18: gpio_put(LED_PIN, 1); break; // Turn on LED
+            case 17: gpio_put(LED_PIN, 0); break; // Turn on LED
             default: break; // Do nothing for unrecognized signals
+            //need to add sending sensor data functionality
         }
-        break;
-
-        case I2C_SLAVE_REQUEST:
-        data[0] = check_leak();
-        data[1] = static_cast<uint8_t>(read_ph() * 100 / 65535); // Scale 16-bit ADC value to 0-100 range
-        i2c_write_byte(i2c, data[0]);
-        i2c_write_byte(i2c, data[1]);
-        break;
-
     }
 
-
-static void setup_slave() {
-    gpio_init(I2C_SLAVE_SDA_PIN);
-    gpio_set_function(I2C_SLAVE_SDA_PIN, GPIO_FUNC_I2C);
-    gpio_pull_up(I2C_SLAVE_SDA_PIN);
-
-    gpio_init(I2C_SLAVE_SCL_PIN);
-    gpio_set_function(I2C_SLAVE_SCL_PIN, GPIO_FUNC_I2C);
-    gpio_pull_up(I2C_SLAVE_SCL_PIN);
-
-    i2c_init(i2c0, I2C_BAUDRATE);
-    // configure I2C0 for slave mode
-    i2c_slave_init(i2c0, I2C_ADDR, &i2c_slave_handler);
+    
 }
 
+void setup_uart() {
+    uart_init(UART_ID, 2400);
+    gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
+    gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
+    uart_set_hw_flow(UART_ID, false, false);
+    uart_set_format(UART_ID, 8, 1, UART_PARITY_NONE);
+    uart_set_baudrate(UART_ID, BAUDRATE);
+    uart_set_fifo_enabled(UART_ID, false);
+
+    int UART_IRQ = UART_ID == uart0 ? UART0_IRQ : UART1_IRQ;
+    irq_set_exclusive_handler(UART_IRQ, on_uart_rx); //UART 0 or 1?
+    irq_set_enabled(UART_IRQ, true);
+    uart_set_irq_enables(UART_ID, true, false);
+
+}
 
 int main() {
     stdio_init_all();
-
-    // i2c setup
-    i2c_init(i2c0, 10000);
-    i2c_set_slave_mode(i2c0, true, I2C_ADDR);
-    gpio_set_function(2, GPIO_FUNC_I2C);
-    gpio_set_function(3, GPIO_FUNC_I2C);
-    gpio_pull_up(2);
-    gpio_pull_up(3);
 
     // Initialize ADC for pH sensor
     adc_init();
@@ -276,13 +284,18 @@ int main() {
     gpio_set_dir(leak_pin, GPIO_IN);
 
     // Initialize LED
-    const uint LED_PIN = PICO_DEFAULT_LED_PIN;
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
 
     initialize_motors();
+    gpio_put(LED_PIN, 1);
 
-    setup_slave()
+    setup_uart();
+
+    while(1){
+        tight_loop_contents();
+    }
 
     return 0;
 }
+
