@@ -2,11 +2,9 @@ import socket
 import serial
 import time
 
-ser = serial.Serial('/dev/serial0', 115200, timeout=5)
-
-msgFromClient = 'Hello Server, from Your Client'
+msgFromClient = 'Hello'
 bytesToSend = msgFromClient.encode('utf-8')
-serverAddress = ('192.168.68.115', 2222)
+serverAddress = ('169.254.37.82', 2222)
 bufferSize = 1024
 
 UDPClient = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

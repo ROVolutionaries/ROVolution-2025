@@ -4,7 +4,7 @@ import time
 bufferSize = 1024
 msgFromServer = "Hello Client, Happy to be Your Server"
 serverPort = 2222
-serverIP = '192.168.68.115'
+serverIP = '192.168.68.100'
 bytesToSend = msgFromServer.encode('utf-8')
 
 # Create a UDP socket

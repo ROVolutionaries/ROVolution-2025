@@ -59,6 +59,8 @@ while running:
                 x = 0 if abs(x) < DEAD_ZONE else x
                 y = 0 if abs(y) < DEAD_ZONE else y
 
+            print(left_stick_x)
+
             #Calculate magnitude and normalise
             magnitude = math.sqrt(x**2 + y**2)
             if magnitude > 1:
