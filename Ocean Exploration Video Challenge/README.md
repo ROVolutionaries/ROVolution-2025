@@ -262,7 +262,7 @@ We can see that both the precision and loss metrics have plateaued, indicating t
 Our final trained **YOLOv9 model** is publicly available under an open-source license for research and educational use.
 
 **Download:**  
-[Trained model weights (.pt)](huggingface.co/petabytecat/rovolutionaries-object-detection/tree/main)  
+[Trained model weights (.pt)](https://huggingface.co/petabytecat/rovolutionaries-object-detection/tree/main)  
 
 This project was developed as part of the **NOAA Ocean Exploration Video Challenge** by the **[Your Team Name or Organization]**.  
 We gratefully acknowledge:
