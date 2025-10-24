@@ -264,7 +264,7 @@ Our final trained **YOLOv9 model** is publicly available under an open-source li
 **Download:**  
 [Trained model weights (.pt)](https://huggingface.co/petabytecat/rovolutionaries-object-detection/tree/main)  
 
-This project was developed as part of the **NOAA Ocean Exploration Video Challenge** by the **[Your Team Name or Organization]**.  
+This project was developed as part of the **NOAA Ocean Exploration Video Challenge** by the **ROVolutionaries**.  
 We gratefully acknowledge:
 
 - **NOAA Ocean Exploration** for providing the FathomNet dataset.  
