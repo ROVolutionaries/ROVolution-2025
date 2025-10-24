@@ -1,4 +1,4 @@
-# ROVolution 2025 Open-Sourced Stuff
+# ROVolution 2025 Open-Sourced Resources
 
 ## **Table of Contents**
 
@@ -25,4 +25,4 @@ This repository represents a portion of the overall ROVolution 2025 project, foc
 
 * [YouTube](https://www.youtube.com/@ROVolutionaries)
 * [Instagram](https://www.instagram.com/rovolutionaries/)
-* [2025 Technical Documentation](https://drive.google.com/file/d/1zGqDDCye5YSRfjU_IAGbzJyzfevygd78/view?usp=sharing)
+* [Technical Documentation](https://drive.google.com/file/d/1zGqDDCye5YSRfjU_IAGbzJyzfevygd78/view?usp=sharing)
