@@ -7,6 +7,8 @@
 
 ## **ROV Model**
 
+[Pool Test](youtu.be/HalhtXvYYro)
+
 **Download:**  
 [ROV model drive download](drive.google.com/file/d/1CSuDAXggwamgUQ0F3YDBGZ4MGBTvEjoI/view?usp=sharing)  
 
