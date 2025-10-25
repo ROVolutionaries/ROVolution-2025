@@ -17,6 +17,10 @@
 
 After the competition, a representative from the Coastal and Marine Resources Core Lab (CMR), one of our sponsors, was impressed by our design of the ROV. As a gesture of appreciation for CMR’s support, we decided to donate the ROV to CMR for their professional applications.
 
+![Thrust test setup](images/thrust_test.png)
+
+A custom T200-to-Lego adapter was designed for thrust testing. The STL file can be accessed [Here](files/T200_Lego.stl). 
+
 ---
 
 ## **Float Model**
