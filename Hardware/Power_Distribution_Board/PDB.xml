@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/home/konstantin/rov/ROV_power_board/ROV.kicad_sch</source>
+    <date>Tue 07 Jan 2025 01:55:24 PM +03</date>
+    <tool>Eeschema 6.0.8+dfsg-1~bpo11+1+rpt1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>ROV.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>470 uF</value>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P3.50mm</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>58db2cd9-571c-4678-9a64-359632a87bcf</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>470 uF</value>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P3.50mm</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f73f14a2-c44a-479e-8fdb-b268d91044be</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>470 uF</value>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P3.50mm</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>15c4494e-ca62-47bd-9b12-66b46bacf538</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>470 uF</value>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P3.50mm</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>193aa5e0-fdea-46c4-a49a-033e62eea06d</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>470 uF</value>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P3.50mm</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0a31693a-c926-4df9-a66d-184d550f9eb9</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>P6KEA16A</value>
+      <footprint>Diode_THT:D_DO-15_P12.70mm_Horizontal</footprint>
+      <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>759ae7b7-0a0e-49dc-a377-a8687a1ee470</tstamps>
+    </comp>
+    <comp ref="H1">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_4.3mm_M4</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>78c9f7c4-7ab3-413b-82d7-4c54e64ab9b4</tstamps>
+    </comp>
+    <comp ref="H2">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_4.3mm_M4</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c88f78fb-1269-43e5-830f-62cf19c7fdb6</tstamps>
+    </comp>
+    <comp ref="H3">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_4.3mm_M4</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dfb23144-ca99-40e8-bfe2-bdcac86981c3</tstamps>
+    </comp>
+    <comp ref="H4">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_4.3mm_M4</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>de45053b-16be-4b54-840e-fe1d3456128c</tstamps>
+    </comp>
+    <comp ref="IC1">
+      <value>DCDC_Module_LM2596</value>
+      <footprint>ROV_Custom_Footprints:DCDC_Module_2596</footprint>
+      <libsource lib="ROV_Parts_Custom" part="DCDC_Module_LM2596" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d2249605-9b99-4af3-bb68-0b52e2ec42ed</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>Tether Anderson Powerpole</value>
+      <footprint>TerminalBlock:TerminalBlock_bornier-2_P5.08mm</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1ee2623a-18e7-4278-a022-8c5bdb5cfe67</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5a3e13d6-a61a-4717-81e7-d55652ccead7</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>827e4853-e99e-4479-b94d-acda9101fde7</tstamps>
+    </comp>
+    <comp ref="J4">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>747a9c18-e5d2-44a2-8eae-5de907ac5a78</tstamps>
+    </comp>
+    <comp ref="J5">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b0181f5b-4982-48b6-a99e-301146a92e96</tstamps>
+    </comp>
+    <comp ref="J6">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e499fe82-6a9b-4875-970b-72a174df2e8e</tstamps>
+    </comp>
+    <comp ref="J7">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d867cc73-af50-4409-907c-1433bd9d8644</tstamps>
+    </comp>
+    <comp ref="J8">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9ae1fd22-7541-4853-ad56-4e4e63009caa</tstamps>
+    </comp>
+    <comp ref="J9">
+      <value>ESC TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8ade65dc-c5b3-46df-b3df-289a9905c9bf</tstamps>
+    </comp>
+    <comp ref="J10">
+      <value>Aux TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d4c60eac-3e40-489d-b058-550be6b61255</tstamps>
+    </comp>
+    <comp ref="J11">
+      <value>Aux TX30</value>
+      <footprint>Connector_AMASS:AMASS_XT30U-M_1x02_P5.0mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>20b2195d-7035-427f-9c60-e0b3199e7200</tstamps>
+    </comp>
+    <comp ref="J12">
+      <value>JST8</value>
+      <footprint>Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="File: ROV.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>69dcec68-c0ab-4174-9bc3-a653a401717f</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector_Generic" part="Conn_01x02">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="D_TVS">
+      <description>Bidirectional transient-voltage-suppression diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_TVS</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A1" type="passive"/>
+        <pin num="2" name="A2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
+      </fields>
+    </libpart>
+    <libpart lib="ROV_Parts_Custom" part="DCDC_Module_LM2596">
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">DCDC_Module_LM2596</field>
+        <field name="Footprint">ROV_Custom_Footprints:DCDC_Module_2596</field>
+      </fields>
+      <pins>
+        <pin num="1" name="IN+" type="input"/>
+        <pin num="1-UB" name="IN+" type="input"/>
+        <pin num="1-UC" name="IN+" type="input"/>
+        <pin num="1-UD" name="IN+" type="input"/>
+        <pin num="2" name="IN-" type="input"/>
+        <pin num="2-UB" name="IN-" type="input"/>
+        <pin num="2-UC" name="IN-" type="input"/>
+        <pin num="2-UD" name="IN-" type="input"/>
+        <pin num="3" name="OUT-" type="output"/>
+        <pin num="3-UB" name="OUT-" type="output"/>
+        <pin num="3-UC" name="OUT-" type="output"/>
+        <pin num="3-UD" name="OUT-" type="output"/>
+        <pin num="4" name="OUT+" type="output"/>
+        <pin num="4-UB" name="OUT+" type="output"/>
+        <pin num="4-UC" name="OUT+" type="output"/>
+        <pin num="4-UD" name="OUT+" type="output"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector_Generic">
+      <uri>/usr/share/kicad/symbols//Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>/usr/share/kicad/symbols//Device.kicad_sym</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>/usr/share/kicad/symbols//Mechanical.kicad_sym</uri>
+    </library>
+    <library logical="ROV_Parts_Custom">
+      <uri>/home/konstantin/.local/share/kicad/6.0/symbols/ROV_Parts_Custom.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="12V">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A2" pintype="passive"/>
+      <node ref="IC1" pin="1" pinfunction="IN+" pintype="input"/>
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J10" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J11" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J4" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J5" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J6" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J7" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J8" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J9" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+    <net code="2" name="GND">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="A1" pintype="passive"/>
+      <node ref="IC1" pin="2" pinfunction="IN-" pintype="input"/>
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J10" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J11" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J4" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J5" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J6" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J7" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J8" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J9" pin="1" pinfunction="Pin_1" pintype="passive"/>
+    </net>
+    <net code="3" name="Net-(IC1-Pad3)">
+      <node ref="IC1" pin="3" pinfunction="OUT-" pintype="output"/>
+      <node ref="J12" pin="1" pinfunction="Pin_1" pintype="passive"/>
+    </net>
+    <net code="4" name="Net-(IC1-Pad4)">
+      <node ref="IC1" pin="4" pinfunction="OUT+" pintype="output"/>
+      <node ref="J12" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+  </nets>
+</export>
