@@ -15,7 +15,7 @@ This repository represents a portion of the overall ROVolution 2025 project, foc
 
 * **Konstantin Logashenko (CEO)** — PCB design and software.
 * **Dewei David Zhang (CTO)** — CAD design and code contributions.
-* **Ahmed Shaikh (former CEO)** — software and code contributions.
+* **Muhammad Ahmed Shaikh (former CEO)** — software and code contributions.
 
 ---
 
