@@ -2,10 +2,10 @@
 
 ## **Table of Contents**
 
-* [Hardware](./Hardware)
-* [Software](./Software)
+* [Hardware](./Hardware) — PCB designs for the ROV’s Power Distribution and Control Boards, created in KiCad with accompanying schematics, layouts, and 3D models.
+* [Software](./Software) — Python and C++ code for ROV control, communication, and image processing, including surface interfaces, Raspberry Pi and Pico firmware, and testing utilities.
 * [Model](./Model) — 3D models, renders, and Fusion 360 assemblies of the ROV components
-* [Ocean Exploration Video Challenge](./Ocean%20Exploration%20Video%20Challenge) — Object detection and classification for the NOAA Ocean Exploration Video Challenge.
+* [Ocean Exploration Video Challenge](./Ocean%20Exploration%20Video%20Challenge) — Object detection and classification of ocean species for the NOAA Ocean Exploration Video Challenge. 
 
 ---
 
