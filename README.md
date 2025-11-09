@@ -24,3 +24,4 @@ This repository represents a portion of the overall ROVolution 2025 project, foc
 * [YouTube](https://www.youtube.com/@ROVolutionaries)
 * [Instagram](https://www.instagram.com/rovolutionaries/)
 * [Technical Documentation](https://drive.google.com/file/d/1zGqDDCye5YSRfjU_IAGbzJyzfevygd78/view?usp=sharing)
+* [Additional Files](https://docs.google.com/spreadsheets/d/10eZ-Em9sXnn5XWBDeCyZJDLGmav5vlog2l0rmnmTBGw/edit?gid=2110360715#gid=2110360715)
